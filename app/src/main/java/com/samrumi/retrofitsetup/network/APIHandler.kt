@@ -1,4 +1,4 @@
-package com.samrumi.retrofitsetup.utils
+package com.samrumi.retrofitsetup.network
 
 import okhttp3.ResponseBody
 import retrofit2.Call

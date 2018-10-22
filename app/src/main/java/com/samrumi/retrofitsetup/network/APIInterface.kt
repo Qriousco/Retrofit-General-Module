@@ -1,4 +1,4 @@
-package com.samrumi.retrofitsetup.api
+package com.samrumi.retrofitsetup.network
 
 import retrofit2.Call
 import retrofit2.http.GET

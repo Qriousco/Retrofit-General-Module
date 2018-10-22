@@ -3,14 +3,7 @@ package com.samrumi.retrofitsetup.model
 import com.google.gson.annotations.SerializedName
 
 data class UserData(
-        @SerializedName("id")
-        var id: Int,
-
-        @SerializedName("first_name")
-        var first_name: String,
-
-        @SerializedName("last_name")
-        var last_name: String,
-
-        @SerializedName("avatar")
-        var avatar: String)
+        @SerializedName("id") val id: Int,
+        @SerializedName("first_name") val firstName: String,
+        @SerializedName("last_name") val lastName: String,
+        @SerializedName("avatar") val avatar: String)

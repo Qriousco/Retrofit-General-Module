@@ -34,8 +34,8 @@ class PostAdapter(private val activity: Activity,
 
         fun setInfo(posts: UserData) {
             Glide.with(activity).load(posts.avatar).into(mImage)
-            mTitle.text = posts.first_name
-            mBody.text = posts.last_name
+            mTitle.text = posts.firstName
+            mBody.text = posts.lastName
         }
     }
 }

@@ -8,10 +8,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
-import com.samrumi.retrofitsetup.R
 import com.samrumi.retrofitsetup.adapter.PostAdapter
 import com.samrumi.retrofitsetup.model.UserData
 import com.samrumi.retrofitsetup.model.Users
+import com.samrumi.retrofitsetup.network.ApiResult
 import com.samrumi.retrofitsetup.viewModel.UserViewModel
 import com.samrumi.retrofitsetup.viewModel.UserViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,6 +20,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
+import com.samrumi.retrofitsetup.R
 
 class MainActivity : AppCompatActivity(), KodeinAware {
 
@@ -33,16 +34,14 @@ class MainActivity : AppCompatActivity(), KodeinAware {
         val postViewModel = ViewModelProviders.of(this@MainActivity, postViewModelFactory)
                 .get(UserViewModel::class.java)
         postViewModel.getPosts().observe(this@MainActivity, Observer {
-            if (it.apiResponse == null) {
-                //handle the error
-                handlerError()
-            }
-
-            if (it.error == null) {
-                //handle the response
-                val userResponseObject = Gson().fromJson(Gson().toJson((it.apiResponse)),
+            if (it is ApiResult.Success<*>) {
+                //handle the data response
+                val userResponseObject = Gson().fromJson(Gson().toJson((it.data)),
                         Users::class.java)
                 handleAPIResponse(userResponseObject.data)
+            } else {
+                //handle the error
+                handlerError()
             }
         })
     }
